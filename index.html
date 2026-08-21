@@ -1,64 +1,239 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>네트워크관리사 2급 기출문제</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap');
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>자격증 학습 허브 · 네트워크관리사 / SQLD / 빅데이터분석기사 / 정보처리기사</title>
+<meta name="description" content="네트워크관리사 2급, SQLD, 빅데이터분석기사 필기, 정보처리기사 실기 실전 모의고사를 한 곳에서. 실제 CBT와 같은 환경으로 응시하고 과목별 진행 상황을 한눈에 봅니다.">
+<link rel="stylesheet" href="./assets/design.css">
+<style>
+#hero{padding:56px 0 40px}
+#hero h1{font-size:clamp(32px,5vw,52px);font-weight:800;margin:0 0 16px}
+#hero h1 em{font-style:normal;color:var(--brand)}
+#hero .lede{margin-bottom:30px}
 
-        body {
-            font-family: 'Pretendard', sans-serif;
-        }
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-1)}
+.stats div{padding:16px 20px;border-right:1px solid var(--line)}
+.stats div:last-child{border-right:0}
+.stats dt{font-size:12px;font-weight:600;color:var(--ink-3);margin:0 0 5px}
+.stats dd{margin:0;font-size:20px;font-weight:750;letter-spacing:-.02em}
 
-        .correct-opt {
-            background-color: #f0fdf4 !important;
-            border-color: #22c55e !important;
-        }
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px;padding-bottom:8px}
+.card-cert{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:24px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--shadow-1);
+  transition:transform .18s cubic-bezier(.22,.8,.24,1), box-shadow .18s, border-color .18s;
+}
+.card-cert:hover{transform:translateY(-3px);box-shadow:var(--shadow-2);border-color:var(--line-2)}
+.card-cert .no{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--brand);font-weight:600}
+.card-cert h2{font-size:22px;margin:0}
+.card-cert .desc{font-size:13.5px;color:var(--ink-2);min-height:42px}
+.card-cert .meta{display:flex;flex-wrap:wrap;gap:5px}
 
-        .incorrect-opt {
-            background-color: #fef2f2 !important;
-            border-color: #ef4444 !important;
-        }
+.coverage{
+  display:flex;flex-wrap:wrap;gap:6px 14px;padding:11px 13px;
+  background:var(--surface-2);border:1px solid var(--line);border-radius:10px;font-size:12px;
+}
+.coverage .k{color:var(--ink-3);margin-right:5px}
+.coverage .v{color:var(--ink);font-weight:650}
+.coverage .v.mono{font-family:var(--mono);font-weight:600}
 
-        .sticky-nav {
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-        }
-    </style>
+.dday{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-2)}
+.dday input{font-family:var(--mono);font-size:12.5px;padding:6px 9px;border:1px solid var(--line-2);border-radius:8px;background:var(--surface);color:var(--ink)}
+.dday input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px color-mix(in srgb, var(--brand) 18%, transparent)}
+.dday .count{font-family:var(--mono);font-weight:700;font-size:13px;padding:3px 9px;border-radius:999px;background:var(--brand-soft);color:var(--brand-ink)}
+.dday .count.soon{background:var(--bad-soft);color:var(--bad)}
+.dday .count.past{background:var(--surface-3);color:var(--ink-3)}
+
+.state{border-top:1px solid var(--line);padding-top:14px;margin-top:auto}
+.state .row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:8px}
+.state .headline{font-size:14.5px;font-weight:700}
+.state .headline.none{font-weight:400;color:var(--ink-3)}
+.state .when{font-family:var(--mono);font-size:11px;color:var(--ink-3);white-space:nowrap}
+.state .best{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin:8px 0 0}
+
+.log{margin:44px 0 90px;padding-top:26px;border-top:1px solid var(--line)}
+.log h3{font-size:15px;margin:0 0 4px}
+.log .hint{font-size:13px;color:var(--ink-2);margin:0 0 16px}
+.log ol{list-style:none;margin:0;padding:0;display:grid;gap:6px;max-width:860px}
+.log li{
+  display:grid;grid-template-columns:170px minmax(0,1fr) auto;gap:14px;align-items:baseline;
+  background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:11px 14px;font-size:13.5px;
+}
+.log li .cert{font-size:12px;font-weight:650;color:var(--brand-ink)}
+.log li .what{color:var(--ink-2)}
+.log li .what b{color:var(--ink);font-weight:700}
+.log li time{font-family:var(--mono);font-size:11.5px;color:var(--ink-3)}
+.log .empty{color:var(--ink-3);font-size:13.5px;margin:0}
+.log .reset{margin-top:18px}
+
+@media (max-width:640px){
+  .log li{grid-template-columns:1fr;gap:3px}
+  .stats div{border-right:0;border-bottom:1px solid var(--line)}
+}
+</style>
 </head>
+<body>
 
-<body class="bg-gray-50 text-gray-900 min-h-screen">
+<nav class="topnav"><div class="wrap">
+  <span class="brandmark"><span class="dot"></span>자격증 학습 허브</span>
+  <span class="spacer"></span>
+  <span class="crumb" id="nav-updated"></span>
+</div></nav>
 
-    <nav class="sticky-nav border-b border-gray-200 p-4 shadow-sm">
-        <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="w-full md:w-2/3">
-                <div class="flex justify-between text-xs font-bold mb-1">
-                    <span id="progress-text" class="text-blue-600">진행도: 0 / 0</span>
-                    <span id="score-text" class="text-green-600">진행률: 0%</span>
-                </div>
-                <div class="w-full bg-gray-200 rounded-full h-2.5">
-                    <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300 w-0"></div>
-                </div>
-            </div>
-            <button id="reset-trigger"
-                class="w-full md:w-auto bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg font-bold transition-transform active:scale-95">
-                학습 내역 초기화
-            </button>
+<main class="wrap">
+  <section id="hero">
+    <p class="eyebrow">Certification Study Hub</p>
+    <h1>네 개의 자격증 시험을<br><em>한 곳에서</em> 실전처럼</h1>
+    <p class="lede">네트워크관리사 2급 · SQLD · 빅데이터분석기사 필기 · 정보처리기사 실기를 실제 CBT와 같은 환경으로 풀어 봅니다. 타이머, 답안지, 보류, 자동 제출, 과목별 채점까지 시험장 그대로이며, 풀이 기록은 이 브라우저에만 저장됩니다.</p>
+    <dl class="stats">
+      <div><dt>과목</dt><dd id="s-certs">4</dd></div>
+      <div><dt>모의고사</dt><dd id="s-papers">12회분</dd></div>
+      <div><dt>전체 문항</dt><dd id="s-q">600문항</dd></div>
+      <div><dt>기록 저장</dt><dd>이 브라우저</dd></div>
+    </dl>
+  </section>
+
+  <section class="cards" id="cards"></section>
+
+  <section class="log">
+    <h3>최근 학습 기록</h3>
+    <p class="hint">모의고사를 채점하면 자동으로 쌓입니다. 과목별 최근 12건까지 보여 줍니다.</p>
+    <ol id="loglist"></ol>
+    <p class="empty" id="logempty" style="display:none">아직 기록이 없습니다. 위에서 과목을 골라 시작해 보세요.</p>
+    <button class="btn quiet reset" id="resetAll">모든 학습 기록 지우기</button>
+  </section>
+</main>
+
+<script src="./assets/study-hub.js"></script>
+<script>
+/* 각 과목의 구성과 '어느 회차까지 반영했는지'를 한곳에서 관리합니다.
+   문항을 늘리거나 최신 회차를 반영하면 papers/questions/coverage 값을 함께 고쳐 주세요. */
+const CERTS = [
+  {
+    id: 'network', href: './network/', title: '네트워크관리사 2급',
+    desc: '4과목 50문항 50분. TCP/IP · 네트워크 일반 · NOS · 네트워크 운용기기에서 고르게 출제되는 문제은행형 필기 시험입니다.',
+    meta: ['3회분 · 150문항', '50분', '60점 합격'],
+    papers: 3, questions: 150,
+    coverage: { basis: '2024년 1회 ~ 2026년 2회 기출 경향', updated: '2026-08-29' },
+    cta: '모의고사 응시'
+  },
+  {
+    id: 'sqld', href: './sqld/', title: 'SQLD',
+    desc: '2과목 50문항 90분. 데이터 모델링의 이해 10문항과 SQL 기본 및 활용 40문항으로 구성되며 과목별 과락이 있습니다.',
+    meta: ['3회분 · 150문항', '90분', '60점 합격'],
+    papers: 3, questions: 150,
+    coverage: { basis: 'SQLD 공식 출제 범위 (회차 무관)', updated: '2026-08-29' },
+    cta: '모의고사 응시'
+  },
+  {
+    id: 'bigdata', href: './bigdata/', title: '빅데이터분석기사 필기',
+    desc: '4과목 각 20문항, 총 80문항 120분. 평균 60점 이상이면서 한 과목도 8문항 미만이 되면 안 되는 과락 구조입니다.',
+    meta: ['3회분 · 240문항', '120분', '평균 60점'],
+    papers: 3, questions: 240,
+    coverage: { basis: '제12회 필기 복원 키워드', updated: '2026-08-29' },
+    cta: '모의고사 응시'
+  },
+  {
+    id: 'sitpe', href: './sitpe/', title: '정보처리기사 실기',
+    desc: '20문항 150분, 문항당 5점. 객관식이 아니라 답을 직접 입력하며 코드 실행 결과·단답형·약술형이 섞여 나옵니다.',
+    meta: ['3회분 · 60문항', '150분', '60점 합격'],
+    papers: 3, questions: 60,
+    coverage: { basis: '2026년 2회 예상 출제 범위', updated: '2026-08-29' },
+    cta: '모의고사 응시'
+  }
+];
+
+const esc = t => String(t == null ? '' : t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const CERT_NAME = CERTS.reduce((m, c) => (m[c.id] = c.title, m), {});
+
+function ddayText(n){
+  if (n === null) return '';
+  if (n === 0) return 'D-DAY';
+  return n > 0 ? 'D-' + n : 'D+' + (-n);
+}
+
+function cardHtml(c){
+  const latest = StudyHub.latest(c.id);
+  const best = StudyHub.best(c.id);
+  const examDate = StudyHub.get(c.id).examDate || '';
+  const d = StudyHub.dday(c.id);
+  const pct = latest ? latest.pct : 0;
+  const fill = latest && latest.pass === false ? 'bad' : (pct < 60 ? 'warn' : 'ok');
+  const showBest = best && latest && best.at !== latest.at && best.pct > latest.pct;
+
+  return `
+    <article class="card-cert">
+      <span class="no">${esc(c.id.toUpperCase())}</span>
+      <h2>${esc(c.title)}</h2>
+      <p class="desc">${esc(c.desc)}</p>
+      <div class="meta">${c.meta.map(m => `<span class="badge brand">${esc(m)}</span>`).join('')}</div>
+
+      <div class="coverage">
+        <span><span class="k">반영 회차</span><span class="v">${esc(c.coverage.basis)}</span></span>
+        <span><span class="k">최종 업데이트</span><span class="v mono">${esc(c.coverage.updated)}</span></span>
+      </div>
+
+      <div class="dday">
+        <label for="date-${c.id}">시험일</label>
+        <input type="date" id="date-${c.id}" data-cert="${c.id}" value="${esc(examDate)}">
+        ${d !== null ? `<span class="count ${d < 0 ? 'past' : (d <= 14 ? 'soon' : '')}">${ddayText(d)}</span>` : ''}
+      </div>
+
+      <div class="state">
+        <div class="row">
+          <span class="headline ${latest ? '' : 'none'}">${latest ? esc(latest.headline) : '아직 응시 기록 없음'}</span>
+          ${latest ? `<span class="when">${esc(latest.label)} · ${esc(StudyHub.formatDate(latest.at))}</span>` : ''}
         </div>
-    </nav>
+        <span class="track"><i class="${fill}" style="width:${pct}%"></i></span>
+        ${showBest ? `<p class="best">최고 기록 ${esc(best.headline)} · ${esc(best.label)}</p>` : ''}
+      </div>
 
-    <main class="max-w-4xl mx-auto p-4 py-8">
-        <div id="quiz-list" class="space-y-8">
-            <!-- Questions rendered here -->
-        </div>
-    </main>
-    <script src="./index.js"></script>
+      <a class="btn" href="${c.href}">${esc(c.cta)}</a>
+    </article>`;
+}
+
+function logHtml(){
+  const rows = [];
+  CERTS.forEach(c => StudyHub.get(c.id).history.forEach(h => rows.push(Object.assign({ cert: c.id }, h))));
+  rows.sort((a, b) => (a.at < b.at ? 1 : -1));
+  return rows.slice(0, 12).map(r => `
+    <li>
+      <span class="cert">${esc(CERT_NAME[r.cert] || r.cert)}</span>
+      <span class="what"><b>${esc(r.headline)}</b> · ${esc(r.label)}</span>
+      <time>${esc(StudyHub.formatDate(r.at))}</time>
+    </li>`).join('');
+}
+
+function render(){
+  document.getElementById('s-certs').textContent = CERTS.length;
+  document.getElementById('s-papers').textContent = CERTS.reduce((a, c) => a + c.papers, 0) + '회분';
+  document.getElementById('s-q').textContent = CERTS.reduce((a, c) => a + c.questions, 0) + '문항';
+  document.getElementById('nav-updated').textContent =
+    '최종 업데이트 ' + CERTS.map(c => c.coverage.updated).sort().slice(-1)[0];
+
+  document.getElementById('cards').innerHTML = CERTS.map(cardHtml).join('');
+
+  const rows = logHtml();
+  document.getElementById('loglist').innerHTML = rows;
+  document.getElementById('logempty').style.display = rows ? 'none' : 'block';
+
+  document.querySelectorAll('.dday input').forEach(input => {
+    input.addEventListener('change', e => {
+      StudyHub.setExamDate(e.target.dataset.cert, e.target.value || null);
+      render();
+    });
+  });
+}
+
+document.getElementById('resetAll').addEventListener('click', () => {
+  if (confirm('네 과목의 학습 기록과 시험일을 모두 지웁니다. 계속할까요?')) {
+    StudyHub.clearAll();
+    render();
+  }
+});
+
+render();
+</script>
 </body>
-
 </html>
