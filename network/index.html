@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>네트워크관리사 2급 필기 실전 모의고사 · 자격증 학습 허브</title>
+<meta name="description" content="네트워크관리사 2급 필기 실전 모의고사 3회분. 4과목 50문항 50분, 실제 CBT와 같은 환경으로 응시하고 과목별 성취도까지 확인합니다.">
+<link rel="stylesheet" href="../assets/design.css">
+<link rel="stylesheet" href="../assets/exam.css">
+</head>
+<body>
+
+<div id="app"></div>
+
+<script src="../assets/study-hub.js"></script>
+<script src="./data.js"></script>
+<script>
+window.EXAM_META = {
+  id: 'network',
+  cert: '네트워크관리사 2급',
+  eyebrow: 'ICQA 국가공인 · 필기',
+  headline: '네트워크관리사 2급 필기<br>실전 모의고사 <em>3회분</em>',
+  lede: '실제 시험과 같은 50문항 50분 구성입니다. 4과목(TCP/IP · 네트워크 일반 · NOS · 네트워크 운용기기)에서 고르게 출제되며, 100점 만점에 60점 이상이면 합격입니다. 2급 필기는 문제은행 방식이라 회차를 반복해서 푸는 것이 가장 빠른 길입니다.',
+  minutes: 50,
+  perQuestion: 2,
+  passTotal: 60,
+  subjects: [
+    { name: '1과목 · TCP/IP', short: '1과목 TCP/IP', count: 14, cut: null },
+    { name: '2과목 · 네트워크 일반', short: '2과목 네트워크 일반', count: 14, cut: null },
+    { name: '3과목 · NOS', short: '3과목 NOS', count: 14, cut: null },
+    { name: '4과목 · 네트워크 운용기기', short: '4과목 운용기기', count: 8, cut: null }
+  ],
+  spec: [
+    ['문항', '50문항 · 회차당'],
+    ['시간', '50분'],
+    ['구성', 'TCP/IP 14 · 일반 14 · NOS 14 · 운용기기 8'],
+    ['합격', '100점 만점 60점 이상'],
+    ['과락', '없음 (총점 기준)']
+  ],
+  coverage: {
+    basis: '2024년 1회 ~ 2026년 2회 기출 경향',
+    updated: '2026-08-29',
+    source: '회차별 기출 복원 문항을 4과목 체계로 재분류하고, 서브넷 계산·보안 장비·NOS 명령어 등 최근 반복 출제 영역을 보강해 3회분 150문항으로 재구성했습니다. 과목 구분과 문항 수는 ICQA 출제기준(과목당 5~18문항, 총 50문항)을 따랐습니다.'
+  },
+  tips: [
+    { h: '푸는 방법', p: '답을 고르면 오른쪽 답안지에 표시됩니다. 헷갈리는 문항은 보류를 눌러 두었다가 마지막에 돌아오세요.' },
+    { h: '2급 필기 공략', p: '문제은행 방식이라 보기 순서만 바뀌어 반복 출제됩니다. 보기 순서 섞기를 켜 두고 답 위치가 아닌 내용으로 기억하세요.' },
+    { h: '기록', p: '채점 결과는 이 브라우저에 저장되어 학습 허브 카드에 최근 점수로 표시됩니다.' }
+  ]
+};
+</script>
+<script src="../assets/exam-engine.js"></script>
+</body>
+</html>
