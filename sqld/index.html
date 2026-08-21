@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SQLD 실전 모의고사 · 자격증 학습 허브</title>
+<meta name="description" content="SQLD 실전 모의고사 3회분. 50문항 90분, 실제 시험과 동일한 CBT 환경으로 응시하고 과목별 과락까지 채점합니다.">
+<link rel="stylesheet" href="../assets/design.css">
+<link rel="stylesheet" href="../assets/exam.css">
+</head>
+<body>
+
+<div id="app"></div>
+
+<script src="../assets/study-hub.js"></script>
+<script src="./data.js"></script>
+<script>
+window.EXAM_META = {
+  id: 'sqld',
+  cert: 'SQLD',
+  eyebrow: 'SQL Developer · 실기 없는 단일 필기',
+  headline: 'SQLD 실전 모의고사 <em>3회분</em>',
+  lede: '실제 시험과 같은 50문항 90분 구성입니다. 답을 고르면 오른쪽 답안지에 표시되고, 시간이 다 되면 자동으로 제출됩니다. 채점 후에는 과목별 점수와 과락 여부를 함께 확인할 수 있습니다.',
+  minutes: 90,
+  perQuestion: 2,
+  passTotal: 60,
+  subjects: [
+    { name: '1과목 · 데이터 모델링의 이해', short: '1과목 모델링', count: 10, cut: 4 },
+    { name: '2과목 · SQL 기본 및 활용', short: '2과목 SQL', count: 40, cut: 16 }
+  ],
+  spec: [
+    ['문항', '50문항 · 회차당'],
+    ['시간', '90분'],
+    ['구성', '1과목 10 / 2과목 40'],
+    ['합격', '총점 60점 이상'],
+    ['과락', '1과목 4문항 · 2과목 16문항']
+  ],
+  coverage: {
+    basis: 'SQLD 공식 출제 범위(2과목 50문항)',
+    updated: '2026-08-29',
+    source: '특정 회차 복원이 아니라 출제 범위 기반으로 구성한 모의고사입니다. 3회분 150문항.'
+  },
+  tips: [
+    { h: '푸는 방법', p: '답을 고르면 오른쪽 답안지에 표시됩니다. 헷갈리는 문항은 보류를 눌러 두었다가 마지막에 돌아오세요.' },
+    { h: '채점 후', p: '틀린 문항만 모아 보거나, 답안지의 번호를 눌러 해당 문항으로 바로 이동할 수 있습니다.' },
+    { h: '기록', p: '채점 결과는 이 브라우저에 저장되어 학습 허브 카드에 최근 점수로 표시됩니다.' }
+  ]
+};
+</script>
+<script src="../assets/exam-engine.js"></script>
+</body>
+</html>

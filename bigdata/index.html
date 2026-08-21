@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>빅데이터분석기사 필기 실전 모의고사 · 자격증 학습 허브</title>
+<meta name="description" content="빅데이터분석기사 필기 실전 모의고사 3회분. 4과목 80문항 120분, 과목별 과락까지 그대로 채점합니다.">
+<link rel="stylesheet" href="../assets/design.css">
+<link rel="stylesheet" href="../assets/exam.css">
+</head>
+<body>
+
+<div id="app"></div>
+
+<script src="../assets/study-hub.js"></script>
+<script src="./data.js"></script>
+<script>
+window.EXAM_META = {
+  id: 'bigdata',
+  cert: '빅데이터분석기사 필기',
+  eyebrow: 'Engineer Big Data Analysis · 필기',
+  headline: '빅데이터분석기사 필기<br>실전 모의고사 <em>3회분</em>',
+  lede: '실제 시험과 동일한 구성입니다. 4과목 각 20문항, 총 80문항 120분. 과목당 40점 이상(8문항)이면서 전 과목 평균 60점 이상(총 48문항)이어야 합격이며, 한 과목이라도 8문항 미만이면 과락입니다.',
+  minutes: 120,
+  perQuestion: 1.25,
+  passTotal: 60,
+  subjects: [
+    { name: '1과목 · 빅데이터 분석 기획', short: '1과목 분석 기획', count: 20, cut: 8 },
+    { name: '2과목 · 빅데이터 탐색', short: '2과목 탐색', count: 20, cut: 8 },
+    { name: '3과목 · 빅데이터 모델링', short: '3과목 모델링', count: 20, cut: 8 },
+    { name: '4과목 · 빅데이터 결과 해석', short: '4과목 결과 해석', count: 20, cut: 8 }
+  ],
+  spec: [
+    ['문항', '80문항 · 회차당'],
+    ['시간', '120분'],
+    ['구성', '4과목 × 20문항'],
+    ['합격', '평균 60점 이상'],
+    ['과락', '과목당 8문항 미만']
+  ],
+  coverage: {
+    basis: '제12회 필기 복원 키워드',
+    updated: '2026-08-29',
+    source: '2회차에 제12회 복원 키워드와 계산 문항을 반영했고, 3회차는 헷갈리는 개념 구분 중심의 고난도로 구성했습니다. 3회분 240문항.'
+  },
+  tips: [
+    { h: '푸는 방법', p: '답을 고르면 오른쪽 답안지에 표시됩니다. 헷갈리는 문항은 보류를 눌러 두었다가 마지막에 돌아오세요.' },
+    { h: '채점 후', p: '과목별 점수와 과락 여부가 함께 표시됩니다. 틀린 문항만 모아 보는 것도 가능합니다.' },
+    { h: '기록', p: '채점 결과는 이 브라우저에 저장되어 학습 허브 카드에 최근 점수로 표시됩니다.' }
+  ]
+};
+</script>
+<script src="../assets/exam-engine.js"></script>
+</body>
+</html>
