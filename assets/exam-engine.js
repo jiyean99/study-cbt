@@ -5,7 +5,7 @@
    EXAM_META = {
      id, cert, eyebrow, headline, lede,
      minutes, perQuestion, passTotal,
-     subjects: [{ name, short, count, cut }],   // cut = 과락 기준 정답 수(없으면 null)
+     subjects: [{ name, short, count, cut, cutScore }],  // cut = 과락 기준 정답 수, cutScore = 과락 기준 점수
      spec: [[용어, 값], ...],
      coverage: { updated, basis, source },
      tips: [{ h, p }, ...]
@@ -38,6 +38,8 @@
   function pad(n) { return String(n).padStart(2, '0'); }
   /* t를 생략한 문항은 객관식으로 봅니다. */
   function type(q) { return q.t || 'mcq'; }
+  /* 문항별 배점. q.pts가 있으면 그 값을, 없으면 회차 공통 배점을 씁니다. */
+  function pts(q) { return q.pts == null ? PER : q.pts; }
 
   /* 문항 수·배점 */
   var TOTAL = EXAMS[0].q.length;
@@ -262,7 +264,7 @@
           '<div class="q-head">' +
             '<span class="q-no">' + q.n + '</span>' +
             '<p class="q-text">' + esc(q.q) + '</p>' +
-            '<span class="q-pts">' + (Math.round(PER * 10) / 10) + '점</span>' +
+            '<span class="q-pts">' + (Math.round(pts(q) * 10) / 10) + '점</span>' +
             '<button class="flag" data-flag="' + i + '" type="button">보류</button>' +
           '</div>' +
           (q.code ? '<pre class="code">' + esc(q.code) + '</pre>' : '') +
@@ -451,17 +453,22 @@
 
   /* 서술형 자가채점이 바뀌면 점수를 다시 계산합니다. */
   function recount(auto) {
-    var per = SUBS.length ? SUBS.map(function () { return 0; }) : [0];
+    var n = SUBS.length || 1;
+    var per = [], score = [], full = [];
+    for (var k = 0; k < n; k++) { per.push(0); score.push(0); full.push(0); }
     cur.q.forEach(function (q, i) {
-      if (isCorrect(q, answers[i])) per[SUBS.length ? q.s - 1 : 0]++;
+      var si = SUBS.length ? q.s - 1 : 0;
+      full[si] += pts(q);
+      if (isCorrect(q, answers[i])) { per[si]++; score[si] += pts(q); }
     });
-    showResult(per, auto);
+    showResult(per, score, full, auto);
   }
 
-  function showResult(per, auto) {
+  function showResult(per, score, full, auto) {
     var correct = per.reduce(function (a, b) { return a + b; }, 0);
-    var total = Math.round(correct * PER * 10) / 10;
+    var total = Math.round(score.reduce(function (a, b) { return a + b; }, 0) * 10) / 10;
     var failed = SUBS.map(function (s, i) {
+      if (s.cutScore != null) return score[i] < s.cutScore ? i : -1;
       return (s.cut != null && per[i] < s.cut) ? i : -1;
     }).filter(function (i) { return i >= 0; });
     var pass = total >= PASS && failed.length === 0;
@@ -477,12 +484,18 @@
 
     if (HAS_SUBS) {
       rows += SUBS.map(function (s, i) {
-        var pctv = Math.round(per[i] / s.count * 100);
-        var low = s.cut != null && per[i] < s.cut;
+        var pctv = full[i] ? Math.round(score[i] / full[i] * 100) : 0;
+        var low = s.cutScore != null ? score[i] < s.cutScore : (s.cut != null && per[i] < s.cut);
+        var cutPct = s.cutScore != null
+          ? (full[i] ? Math.round(s.cutScore / full[i] * 100) : null)
+          : (s.cut != null ? Math.round(s.cut / s.count * 100) : null);
+        var val = META.showSubjectScore
+          ? (Math.round(score[i] * 10) / 10) + ' / ' + (Math.round(full[i] * 10) / 10) + '점'
+          : per[i] + ' / ' + s.count + '문항';
         return '<div class="bar-row"><span class="lbl">' + esc(s.short || s.name) + '</span>' +
           '<span class="bar-track"><span class="bar-fill ' + (low ? 'low' : '') + '" style="width:' + pctv + '%"></span>' +
-          (s.cut != null ? '<span class="cut" style="left:' + Math.round(s.cut / s.count * 100) + '%"></span>' : '') +
-          '</span><span class="bar-val">' + per[i] + ' / ' + s.count + '문항</span></div>';
+          (cutPct != null ? '<span class="cut" style="left:' + cutPct + '%"></span>' : '') +
+          '</span><span class="bar-val">' + val + '</span></div>';
       }).join('');
     }
 
@@ -492,7 +505,7 @@
         '<p class="eyebrow">' + esc(cur.title) + (auto ? ' · 시간 종료로 자동 제출됨' : '') + '</p>' +
         '<p class="verdict-big ' + (pass ? 'pass' : 'fail') + '">' + total + '점 · ' + (pass ? '합격' : '불합격') + '</p>' +
         '<p class="verdict-sub">' + (pass
-          ? '합격 기준(' + PASS + '점' + (SUBS.some(function (s) { return s.cut != null; }) ? ', 과목 과락 없음' : '') + ')을 넘겼습니다. 이 컨디션이면 실전에서도 통과합니다.'
+          ? '합격 기준(' + PASS + '점' + (SUBS.some(function (s) { return s.cut != null || s.cutScore != null; }) ? ', 과목 과락 없음' : '') + ')을 넘겼습니다. 이 컨디션이면 실전에서도 통과합니다.'
           : esc(why.join(' · ')) + ' — 막대의 세로선이 커트라인입니다.') + '</p>' +
         '<div class="bars">' + rows + '</div>' +
         '<div class="res-actions">' +
