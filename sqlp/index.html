@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SQLP 실전 모의고사 · 자격증 학습 허브</title>
+<meta name="description" content="SQLP(SQL 전문가) 실전 모의고사. 객관식 70문항과 서술형 2문항, 180분 구성으로 실행계획·조인·인덱스 튜닝까지 실전과 같이 채점합니다.">
+<link rel="stylesheet" href="../assets/design.css">
+<link rel="stylesheet" href="../assets/exam.css">
+</head>
+<body>
+
+<div id="app"></div>
+
+<script src="../assets/study-hub.js"></script>
+<script src="./data.js"></script>
+<script>
+window.EXAM_META = {
+  id: 'sqlp',
+  cert: 'SQLP',
+  eyebrow: 'SQL Professional · 국가공인 SQL 전문가',
+  headline: 'SQLP 실전 모의고사',
+  lede: '실제 시험과 같은 72문항 180분 구성입니다. 객관식 70문항이 각 1점, 서술형 2문항이 각 15점으로 100점 만점이며, 총점 75점 이상이면서 과목별 배점의 40% 이상을 얻어야 합격합니다. 배점의 70%가 3과목(SQL 고급 활용 및 튜닝)에 몰려 있어 실행계획·조인·인덱스가 당락을 가릅니다.',
+  minutes: 180,
+  perQuestion: 1,
+  passTotal: 75,
+  showSubjectScore: true,
+  subjects: [
+    { name: '1과목 · 데이터 모델링의 이해 (10문항 · 10점)', short: '1과목 모델링', count: 10, cutScore: 4 },
+    { name: '2과목 · SQL 기본 및 활용 (20문항 · 20점)', short: '2과목 SQL 기본', count: 20, cutScore: 8 },
+    { name: '3과목 · SQL 고급 활용 및 튜닝 (객관식 40 + 서술형 2 · 70점)', short: '3과목 고급·튜닝', count: 42, cutScore: 28 }
+  ],
+  spec: [
+    ['문항', '객관식 70 + 서술형 2'],
+    ['시간', '180분'],
+    ['배점', '객관식 1점 · 서술형 15점'],
+    ['합격', '총점 75점 이상'],
+    ['과락', '과목 배점의 40% (4 / 8 / 28점)']
+  ],
+  coverage: {
+    basis: 'SQL 전문가 가이드 출제 범위 (회차 무관)',
+    updated: '2026-08-24',
+    source: '특정 회차의 기출을 옮긴 것이 아니라 SQL 전문가 가이드의 출제 범위와 SQLP 수준의 난이도를 기준으로 새로 작성했습니다. 과목별 문항 수와 배점, 서술형 2문항 구조, 과목별 40% 과락은 실제 시험 규격을 그대로 따랐습니다.'
+  },
+  tips: [
+    { h: '푸는 방법', p: '객관식은 답을 고르면 답안지에 표시되고, 서술형 2문항은 채점 후 모범답안과 채점 포인트를 보고 스스로 맞음/틀림을 표시하면 점수에 반영됩니다.' },
+    { h: '시간 배분', p: '3과목에 70점이 걸려 있습니다. 객관식을 100분 안에 끝내고 서술형에 최소 40분을 남겨 두세요. 객관식을 다 맞혀도 서술형이 비면 75점에 닿지 않습니다.' },
+    { h: 'SQLP 공략', p: '실행계획을 읽는 순서(가장 안쪽부터, 형제는 위에서 아래로), 인덱스 컬럼 순서 3원칙(= 먼저 · 범위 나중 · 정렬과 일치), 조인 방식 선택 기준을 말로 설명할 수 있어야 서술형에서 점수가 나옵니다.' }
+  ]
+};
+</script>
+<script src="../assets/exam-engine.js"></script>
+</body>
+</html>
