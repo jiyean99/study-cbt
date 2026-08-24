@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>자격증 학습 허브 · 네트워크관리사 / SQLD / 빅데이터분석기사 / 정보처리기사</title>
-<meta name="description" content="네트워크관리사 2급, SQLD, 빅데이터분석기사 필기, 정보처리기사 실기 실전 모의고사를 한 곳에서. 실제 CBT와 같은 환경으로 응시하고 과목별 진행 상황을 한눈에 봅니다.">
+<title>자격증 학습 허브 · 네트워크관리사 / SQLD / SQLP / 빅데이터분석기사 / 정보처리기사 / 리눅스마스터 / AWS AI</title>
+<meta name="description" content="네트워크관리사 2급, SQLD, SQLP, 빅데이터분석기사 필기·실기, 정보처리기사 실기, 리눅스마스터 2급, AWS AI Practitioner 실전 모의고사를 한 곳에서. 실제 CBT와 같은 환경으로 응시하고 과목별 진행 상황을 한눈에 봅니다.">
 <link rel="stylesheet" href="./assets/design.css">
 <style>
 #hero{padding:56px 0 40px}
@@ -17,6 +17,30 @@
 .stats div:last-child{border-right:0}
 .stats dt{font-size:12px;font-weight:600;color:var(--ink-3);margin:0 0 5px}
 .stats dd{margin:0;font-size:20px;font-weight:750;letter-spacing:-.02em}
+
+.search{display:flex;align-items:center;gap:10px;margin:0 0 18px;position:relative}
+.search .box{
+  flex:1;display:flex;align-items:center;gap:10px;
+  background:var(--surface);border:1px solid var(--line-2);border-radius:12px;padding:11px 14px;
+  box-shadow:var(--shadow-1);transition:border-color .15s, box-shadow .15s;
+}
+.search .box:focus-within{border-color:var(--brand);box-shadow:0 0 0 3px color-mix(in srgb, var(--brand) 16%, transparent)}
+.search svg{flex:none;width:17px;height:17px;stroke:var(--ink-3);fill:none;stroke-width:2;stroke-linecap:round}
+.search input{flex:1;border:0;background:none;font-size:14.5px;outline:none;min-width:0}
+.search input::placeholder{color:var(--ink-3)}
+.search kbd{
+  font-family:var(--mono);font-size:11px;color:var(--ink-3);
+  border:1px solid var(--line-2);border-bottom-width:2px;border-radius:6px;padding:2px 6px;flex:none;
+}
+.search .clear{display:none;border:0;background:none;color:var(--ink-3);font-size:17px;line-height:1;padding:2px 4px;flex:none}
+.search .clear:hover{color:var(--ink)}
+.search.has-q .clear{display:block}
+.search.has-q kbd{display:none}
+.search-count{font-size:12.5px;color:var(--ink-3);white-space:nowrap}
+.no-hit{
+  grid-column:1/-1;padding:38px 24px;text-align:center;color:var(--ink-3);font-size:14px;
+  background:var(--surface);border:1px dashed var(--line-2);border-radius:var(--r-lg);
+}
 
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px;padding-bottom:8px}
 .card-cert{
@@ -84,8 +108,8 @@
 <main class="wrap">
   <section id="hero">
     <p class="eyebrow">Certification Study Hub</p>
-    <h1>네 개의 자격증 시험을<br><em>한 곳에서</em> 실전처럼</h1>
-    <p class="lede">네트워크관리사 2급 · SQLD · 빅데이터분석기사 필기 · 정보처리기사 실기를 실제 CBT와 같은 환경으로 풀어 봅니다. 타이머, 답안지, 보류, 자동 제출, 과목별 채점까지 시험장 그대로이며, 풀이 기록은 이 브라우저에만 저장됩니다.</p>
+    <h1>자격증 시험 전 과목을<br><em>한 곳에서</em> 실전처럼</h1>
+    <p class="lede">데이터 · 인프라 · AI 자격증을 실제 CBT와 같은 환경으로 풀어 봅니다. 타이머, 답안지, 보류, 자동 제출, 과목별 채점까지 시험장 그대로이며, 풀이 기록은 이 브라우저에만 저장됩니다.</p>
     <dl class="stats">
       <div><dt>과목</dt><dd id="s-certs">4</dd></div>
       <div><dt>모의고사</dt><dd id="s-papers">12회분</dd></div>
@@ -93,6 +117,16 @@
       <div><dt>기록 저장</dt><dd>이 브라우저</dd></div>
     </dl>
   </section>
+
+  <div class="search" id="search">
+    <label class="box" for="q">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input type="search" id="q" placeholder="과목·키워드로 찾기 (예: SQL, 네트워크, 파이썬, 통계, 실기)" autocomplete="off">
+      <kbd>/</kbd>
+      <button class="clear" id="clearQ" type="button" aria-label="검색어 지우기">&times;</button>
+    </label>
+    <span class="search-count" id="searchCount"></span>
+  </div>
 
   <section class="cards" id="cards"></section>
 
@@ -115,6 +149,7 @@ const CERTS = [
     desc: '4과목 50문항 50분. TCP/IP · 네트워크 일반 · NOS · 네트워크 운용기기에서 고르게 출제되는 문제은행형 필기 시험입니다.',
     meta: ['3회분 · 150문항', '50분', '60점 합격'],
     papers: 3, questions: 150,
+    tags: ['필기', '객관식', 'network', 'tcp/ip', 'osi', '서브넷', 'nos', '리눅스', '라우터', '스위치', '보안', 'icqa'],
     coverage: { basis: '2024년 1회 ~ 2026년 2회 기출 경향', updated: '2026-08-29' },
     cta: '모의고사 응시'
   },
@@ -123,6 +158,7 @@ const CERTS = [
     desc: '2과목 50문항 90분. 데이터 모델링의 이해 10문항과 SQL 기본 및 활용 40문항으로 구성되며 과목별 과락이 있습니다.',
     meta: ['3회분 · 150문항', '90분', '60점 합격'],
     papers: 3, questions: 150,
+    tags: ['필기', '객관식', 'sql', '데이터베이스', 'db', '모델링', '정규화', '조인', '서브쿼리', '데이터'],
     coverage: { basis: 'SQLD 공식 출제 범위 (회차 무관)', updated: '2026-08-29' },
     cta: '모의고사 응시'
   },
@@ -131,6 +167,7 @@ const CERTS = [
     desc: '4과목 각 20문항, 총 80문항 120분. 평균 60점 이상이면서 한 과목도 8문항 미만이 되면 안 되는 과락 구조입니다.',
     meta: ['3회분 · 240문항', '120분', '평균 60점'],
     papers: 3, questions: 240,
+    tags: ['필기', '객관식', '빅분기', '데이터', '분석', '통계', '머신러닝', '모델링', 'ai'],
     coverage: { basis: '제12회 필기 복원 키워드', updated: '2026-08-29' },
     cta: '모의고사 응시'
   },
@@ -139,7 +176,44 @@ const CERTS = [
     desc: '20문항 150분, 문항당 5점. 객관식이 아니라 답을 직접 입력하며 코드 실행 결과·단답형·약술형이 섞여 나옵니다.',
     meta: ['3회분 · 60문항', '150분', '60점 합격'],
     papers: 3, questions: 60,
+    tags: ['실기', '단답형', '코딩', 'c', 'java', 'python', '파이썬', 'sql', '정처기', '디자인패턴', '보안'],
     coverage: { basis: '2026년 2회 예상 출제 범위', updated: '2026-08-29' },
+    cta: '모의고사 응시'
+  },
+  {
+    id: 'bigdata-prac', href: './bigdata-practical/', title: '빅데이터분석기사 실기',
+    desc: '작업형 10문항 180분. 전처리·요약(30점), 모델링과 예측(40점), 통계적 가설검정(30점)을 파이썬으로 직접 풀어내는 시험입니다.',
+    meta: ['3회분 · 30문항', '180분', '60점 합격'],
+    papers: 3, questions: 30,
+    tags: ['실기', '코딩', 'python', '파이썬', 'pandas', '판다스', 'sklearn', '머신러닝', '통계', '가설검정', 't검정', '회귀', '빅분기', 'ai', '데이터'],
+    coverage: { basis: '제6회 이후 실기 체계 · 최근 회차 유형', updated: '2026-08-29' },
+    cta: '모의고사 응시'
+  },
+  {
+    id: 'sqlp', href: './sqlp/', title: 'SQLP',
+    desc: '객관식 70문항과 서술형 2문항, 180분. 배점의 70%가 실행계획·조인·인덱스 튜닝에 몰려 있는 SQLD의 상위 자격입니다.',
+    meta: ['1회분 · 72문항', '180분', '75점 합격'],
+    papers: 1, questions: 72,
+    tags: ['필기', '서술형', 'sql', '튜닝', '실행계획', '옵티마이저', '인덱스', '조인', '데이터베이스', 'db', '전문가'],
+    coverage: { basis: 'SQL 전문가 가이드 출제 범위', updated: '2026-08-24' },
+    cta: '모의고사 응시'
+  },
+  {
+    id: 'linux2', href: './linux2/', title: '리눅스마스터 2급',
+    desc: '1차 50문항 60분. 명령어·권한·프로세스·패키지 관리와 네트워크 활용까지, 서버 운영의 바닥을 다지는 시험입니다.',
+    meta: ['1회분 · 50문항', '60분', '60점 합격'],
+    papers: 1, questions: 50,
+    tags: ['필기', '객관식', 'linux', '리눅스', '셸', 'shell', '명령어', '권한', 'chmod', '서버', '인프라', 'kait'],
+    coverage: { basis: 'KAIT 공개 출제기준 (2급 1차)', updated: '2026-08-24' },
+    cta: '모의고사 응시'
+  },
+  {
+    id: 'aws-aif', href: './aws-aif/', title: 'AWS AI Practitioner',
+    desc: '생성형 AI · Bedrock · RAG · 책임 있는 AI를 다루는 AWS 파운데이셔널 인증(AIF-C01). 공식 도메인 가중치 그대로 50문항 90분입니다.',
+    meta: ['1회분 · 50문항', '90분', '700/1000 합격'],
+    papers: 1, questions: 50,
+    tags: ['aws', 'ai', '생성형 ai', 'genai', 'bedrock', 'sagemaker', 'rag', 'llm', '프롬프트', '클라우드', 'cloud', 'aif-c01', '머신러닝'],
+    coverage: { basis: 'AIF-C01 공식 시험 가이드 가중치', updated: '2026-08-24' },
     cta: '모의고사 응시'
   }
 ];
@@ -205,18 +279,39 @@ function logHtml(){
     </li>`).join('');
 }
 
-function render(){
-  document.getElementById('s-certs').textContent = CERTS.length;
-  document.getElementById('s-papers').textContent = CERTS.reduce((a, c) => a + c.papers, 0) + '회분';
-  document.getElementById('s-q').textContent = CERTS.reduce((a, c) => a + c.questions, 0) + '문항';
-  document.getElementById('nav-updated').textContent =
-    '최종 업데이트 ' + CERTS.map(c => c.coverage.updated).sort().slice(-1)[0];
+/* 제목·설명·배지·태그를 한 문자열로 합쳐 부분 일치로 거릅니다. */
+function haystack(c){
+  return [c.title, c.desc, c.meta.join(' '), (c.tags || []).join(' '), c.coverage.basis]
+    .join(' ').toLowerCase();
+}
 
-  document.getElementById('cards').innerHTML = CERTS.map(cardHtml).join('');
+function currentQuery(){
+  const el = document.getElementById('q');
+  return el ? el.value.trim().toLowerCase() : '';
+}
 
-  const rows = logHtml();
-  document.getElementById('loglist').innerHTML = rows;
-  document.getElementById('logempty').style.display = rows ? 'none' : 'block';
+function visibleCerts(){
+  const q = currentQuery();
+  if (!q) return CERTS;
+  const words = q.split(/\s+/).filter(Boolean);
+  return CERTS.filter(c => {
+    const hay = haystack(c);
+    return words.every(w => hay.includes(w));
+  });
+}
+
+function paintCards(){
+  const q = currentQuery();
+  const list = visibleCerts();
+  const box = document.getElementById('cards');
+
+  box.innerHTML = list.length
+    ? list.map(cardHtml).join('')
+    : `<p class="no-hit">'${esc(q)}' 와 맞는 과목이 없습니다. 과목명이나 SQL · 파이썬 · 통계 같은 키워드로 찾아 보세요.</p>`;
+
+  document.getElementById('search').classList.toggle('has-q', !!q);
+  document.getElementById('searchCount').textContent =
+    q ? `${list.length} / ${CERTS.length}개 과목` : '';
 
   document.querySelectorAll('.dday input').forEach(input => {
     input.addEventListener('change', e => {
@@ -226,10 +321,43 @@ function render(){
   });
 }
 
+function render(){
+  document.getElementById('s-certs').textContent = CERTS.length;
+  document.getElementById('s-papers').textContent = CERTS.reduce((a, c) => a + c.papers, 0) + '회분';
+  document.getElementById('s-q').textContent = CERTS.reduce((a, c) => a + c.questions, 0) + '문항';
+  document.getElementById('nav-updated').textContent =
+    '최종 업데이트 ' + CERTS.map(c => c.coverage.updated).sort().slice(-1)[0];
+
+  paintCards();
+
+  const rows = logHtml();
+  document.getElementById('loglist').innerHTML = rows;
+  document.getElementById('logempty').style.display = rows ? 'none' : 'block';
+}
+
 document.getElementById('resetAll').addEventListener('click', () => {
-  if (confirm('네 과목의 학습 기록과 시험일을 모두 지웁니다. 계속할까요?')) {
+  if (confirm('모든 과목의 학습 기록과 시험일을 지웁니다. 계속할까요?')) {
     StudyHub.clearAll();
     render();
+  }
+});
+
+/* ---- 검색 상호작용 ---- */
+const qInput = document.getElementById('q');
+qInput.addEventListener('input', paintCards);
+qInput.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { qInput.value = ''; paintCards(); qInput.blur(); }
+});
+document.getElementById('clearQ').addEventListener('click', () => {
+  qInput.value = '';
+  paintCards();
+  qInput.focus();
+});
+/* '/' 로 어디서든 검색창으로 */
+document.addEventListener('keydown', e => {
+  if (e.key === '/' && document.activeElement !== qInput && !e.metaKey && !e.ctrlKey) {
+    e.preventDefault();
+    qInput.focus();
   }
 });
 
