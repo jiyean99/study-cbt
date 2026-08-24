@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>빅데이터분석기사 실기 실전 모의고사 · 자격증 학습 허브</title>
+<meta name="description" content="빅데이터분석기사 실기 실전 모의고사 3회분. 작업형 제1·2·3유형 10문항 180분, 실제 시험과 같은 배점 구조로 채점합니다.">
+<link rel="stylesheet" href="../assets/design.css">
+<link rel="stylesheet" href="../assets/exam.css">
+</head>
+<body>
+
+<div id="app"></div>
+
+<script src="../assets/study-hub.js"></script>
+<script src="./data.js"></script>
+<script>
+window.EXAM_META = {
+  id: 'bigdata-prac',
+  cert: '빅데이터분석기사 실기',
+  eyebrow: 'Engineer Big Data Analysis · 실기',
+  headline: '빅데이터분석기사 실기<br>실전 모의고사 <em>3회분</em>',
+  lede: '제6회 이후 고정된 실기 체계 그대로입니다. 작업형 제1유형 3문항(각 10점), 제2유형 1문항(40점), 제3유형 2세트 6문항(각 5점)으로 100점 만점이며 180분 안에 60점을 넘겨야 합격합니다. 제1·3유형은 계산한 값을 직접 입력해 채점하고, 모델링인 제2유형은 모범 코드와 채점 포인트를 보고 스스로 확인합니다.',
+  minutes: 180,
+  perQuestion: 10,
+  passTotal: 60,
+  showSubjectScore: true,
+  subjects: [
+    { name: '작업형 제1유형 · 데이터 전처리와 요약 (3문항 × 10점)', short: '작업형1', count: 3, cut: null },
+    { name: '작업형 제2유형 · 모델링과 예측 (1문항 × 40점)', short: '작업형2', count: 1, cut: null },
+    { name: '작업형 제3유형 · 통계적 가설검정 (6문항 × 5점)', short: '작업형3', count: 6, cut: null }
+  ],
+  spec: [
+    ['문항', '10문항 · 회차당'],
+    ['시간', '180분'],
+    ['배점', '작업형1 30 / 2 40 / 3 30'],
+    ['언어', 'Python (또는 R)'],
+    ['합격', '100점 만점 60점 이상']
+  ],
+  coverage: {
+    basis: '제6회 이후 실기 체계 · 최근 회차 출제 유형',
+    updated: '2026-08-29',
+    source: '실기 기출문제와 시험 데이터셋은 공식 비공개이므로 특정 회차의 원문이 아니라, 제6회부터 고정된 출제 체계(작업형1 3 / 작업형2 1 / 작업형3 2세트)와 최근 회차에서 반복된 유형·난이도를 반영해 재구성했습니다. 작업형1·3의 수치 정답은 전부 직접 계산해 검증했고, t·카이제곱·F 분포 함수는 표준 임계값과 일치함을 확인했습니다.'
+  },
+  tips: [
+    { h: '푸는 방법', p: '지문의 표를 데이터프레임이라 생각하고 직접 코드를 돌린 뒤 결과값을 입력하세요. 반올림 자릿수는 문제에 적힌 대로 맞춰야 합니다.' },
+    { h: '작업형2 채점', p: '모델링 문항은 자동 채점이 불가능하므로, 모범 코드와 채점 포인트를 확인한 뒤 스스로 맞음/틀림을 표시하면 점수에 반영됩니다.' },
+    { h: '실기 공략', p: '작업형2는 전처리 → 학습 → 검증 → 저장 흐름을 통째로 외워 두되, 평가 지표가 확률(ROC-AUC)인지 값(RMSE)인지 라벨(F1)인지를 매번 확인하세요. 템플릿만 믿으면 배점을 절반도 못 가져갑니다.' }
+  ]
+};
+</script>
+<script src="../assets/exam-engine.js"></script>
+</body>
+</html>
