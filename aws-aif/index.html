@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AWS Certified AI Practitioner 실전 모의고사 · 자격증 학습 허브</title>
+<meta name="description" content="AWS Certified AI Practitioner(AIF-C01) 실전 모의고사. 공식 도메인 가중치 그대로 50문항 90분, 700점 합격선 기준으로 채점합니다.">
+<link rel="stylesheet" href="../assets/design.css">
+<link rel="stylesheet" href="../assets/exam.css">
+</head>
+<body>
+
+<div id="app"></div>
+
+<script src="../assets/study-hub.js"></script>
+<script src="./data.js"></script>
+<script>
+window.EXAM_META = {
+  id: 'aws-aif',
+  cert: 'AWS AI Practitioner',
+  eyebrow: 'AWS Certification · AIF-C01 · Foundational',
+  headline: 'AWS Certified<br>AI Practitioner <em>모의고사</em>',
+  lede: '공식 시험 가이드의 도메인 가중치를 그대로 따랐습니다. 실제 시험은 채점 문항 50개에 미채점 문항 15개가 섞여 65문항 90분으로 치러지고 1000점 만점에 700점이면 합격이므로, 여기서는 채점 문항 50개만 두고 70점을 합격선으로 삼았습니다. 시험은 한국어로도 응시할 수 있어 문항을 한국어로 작성했습니다.',
+  minutes: 90,
+  perQuestion: 2,
+  passTotal: 70,
+  subjects: [
+    { name: 'Domain 1 · AI와 머신러닝의 기초 (20%)', short: 'D1 AI/ML 기초', count: 10, cut: null },
+    { name: 'Domain 2 · 생성형 AI의 기초 (24%)', short: 'D2 생성형 AI', count: 12, cut: null },
+    { name: 'Domain 3 · 파운데이션 모델의 활용 (28%)', short: 'D3 FM 활용', count: 14, cut: null },
+    { name: 'Domain 4 · 책임 있는 AI 지침 (14%)', short: 'D4 책임 있는 AI', count: 7, cut: null },
+    { name: 'Domain 5 · 보안·규정 준수·거버넌스 (14%)', short: 'D5 보안·거버넌스', count: 7, cut: null }
+  ],
+  spec: [
+    ['문항', '채점 문항 50개'],
+    ['시간', '90분'],
+    ['구성', '20 / 24 / 28 / 14 / 14 %'],
+    ['합격', '700 / 1000점 (= 70%)'],
+    ['난이도', 'Foundational']
+  ],
+  coverage: {
+    basis: 'AIF-C01 공식 시험 가이드 도메인 가중치',
+    updated: '2026-08-24',
+    source: 'AWS 시험 문제는 비공개이며 덤프 사용은 인증 정책 위반입니다. 공식 시험 가이드의 도메인별 과제 명세(Task Statements)를 기준으로 새로 작성한 문항이며, 도메인 문항 수는 공식 가중치(20/24/28/14/14%)에 정확히 맞췄습니다.'
+  },
+  tips: [
+    { h: '푸는 방법', p: '답을 고르면 오른쪽 답안지에 표시됩니다. 헷갈리는 문항은 보류를 눌러 두었다가 마지막에 돌아오세요.' },
+    { h: 'AIF-C01 공략', p: '서비스 이름을 외우는 문제가 절반입니다. Bedrock(FM API·Knowledge Bases·Agents·Guardrails)과 SageMaker(JumpStart·Clarify·Model Cards)의 역할 구분, RAG와 파인튜닝의 선택 기준이 핵심입니다.' },
+    { h: '실제 시험', p: 'Pearson VUE 시험장 또는 온라인 감독 응시로 치르며 응시료는 100 USD입니다. 미채점 문항 15개는 표시되지 않으므로 모든 문항을 성실히 풀어야 합니다.' }
+  ]
+};
+</script>
+<script src="../assets/exam-engine.js"></script>
+</body>
+</html>
