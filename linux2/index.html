@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>리눅스마스터 2급 1차 실전 모의고사 · 자격증 학습 허브</title>
+<meta name="description" content="리눅스마스터 2급 1차 실전 모의고사. 50문항 60분, 실제 CBT와 같은 환경으로 응시하고 과목별 성취도를 확인합니다.">
+<link rel="stylesheet" href="../assets/design.css">
+<link rel="stylesheet" href="../assets/exam.css">
+</head>
+<body>
+
+<div id="app"></div>
+
+<script src="../assets/study-hub.js"></script>
+<script src="./data.js"></script>
+<script>
+window.EXAM_META = {
+  id: 'linux2',
+  cert: '리눅스마스터 2급',
+  eyebrow: 'KAIT 국가공인 · 2급 1차',
+  headline: '리눅스마스터 2급 1차<br>실전 모의고사',
+  lede: '실제 1차 시험과 같은 50문항 60분 구성입니다. 리눅스 일반과 리눅스 활용 두 영역에서 객관식 사지선다로 출제되며, 100점 만점에 60점(30문항) 이상이면 합격이고 과락은 없습니다. 1차를 통과해야 2차에 응시할 수 있습니다.',
+  minutes: 60,
+  perQuestion: 2,
+  passTotal: 60,
+  subjects: [
+    { name: '1과목 · 리눅스 일반', short: '1과목 리눅스 일반', count: 35, cut: null },
+    { name: '2과목 · 리눅스 활용', short: '2과목 리눅스 활용', count: 15, cut: null }
+  ],
+  spec: [
+    ['문항', '50문항 · 객관식 사지선다'],
+    ['시간', '60분'],
+    ['구성', '리눅스 일반 35 · 리눅스 활용 15'],
+    ['합격', '100점 만점 60점 이상'],
+    ['과락', '없음 (총점 기준)']
+  ],
+  coverage: {
+    basis: 'KAIT 공개 출제기준 (2급 1차)',
+    updated: '2026-08-24',
+    source: 'KAIT가 공개한 2급 출제기준의 대분류(리눅스 일반 / 리눅스 활용)를 그대로 따랐고, 과목별 문항 수는 실제 출제 비중에 맞춰 배분했습니다. 명령어·권한·프로세스·패키지 관리처럼 매 회차 반복되는 영역을 중심으로 1회분 50문항을 구성했습니다.'
+  },
+  tips: [
+    { h: '푸는 방법', p: '답을 고르면 오른쪽 답안지에 표시됩니다. 헷갈리는 문항은 보류를 눌러 두었다가 마지막에 돌아오세요.' },
+    { h: '1차 공략', p: '명령어와 옵션을 눈으로 읽지 말고 직접 쳐 보세요. chmod 8진수, umask 계산, /etc/passwd 필드 순서는 거의 매 회차 나옵니다.' },
+    { h: '기록', p: '채점 결과는 이 브라우저에 저장되어 학습 허브 카드에 최근 점수로 표시됩니다.' }
+  ]
+};
+</script>
+<script src="../assets/exam-engine.js"></script>
+</body>
+</html>
